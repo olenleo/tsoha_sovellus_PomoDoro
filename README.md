@@ -4,7 +4,7 @@ Kurssilla toteutetaan tietokantaa hyödyntävä web-sovellus.
 
 # Sovelluksen kuvaus
 
-PomoDoro on [pomodoro-tekniikaan](https://en.wikipedia.org/wiki/Pomodoro_Technique) perustuva web-sovellus. Pomodorot ovat ~25 minuutin aikaviipaleita. Käyttäjä voi seurata muiden käyttäjien työtä sekä kommentoida tsempatakseen! Lyhyesti ja ytimekkäästi: Sovellust
+PomoDoro on [pomodoro-tekniikaan](https://en.wikipedia.org/wiki/Pomodoro_Technique) perustuva web-sovellus. Pomodorot ovat ~25 minuutin aikaviipaleita. Käyttäjä voi seurata muiden käyttäjien työtä sekä kommentoida tsempatakseen!
 
 Käyttäjä voi
 - Luoda uniikin tilin - esimerkiksi `@M_Mallikas1985`
