@@ -1,0 +1,38 @@
+// for https://dbdiagram.io/d
+Table users as U{
+  id int [pk, increment] // auto-increment
+  name varchar
+  password varchar
+  admin boolean
+}
+
+Table tasks as T {
+  id int [pk]
+  user_id int
+  task_id int
+  taskname text
+  time datetime
+ }
+ 
+Table Comments as C {
+   id int [pk]
+   owner_id int
+   task_id int
+   time datetime
+ }
+ 
+Table follows as  F{
+  id int[pk]
+  user1_id int
+  user2_id int
+}
+
+// Creating references
+
+// > many-to-one; < one-to-many; - one-to-one
+
+Ref: T.user_id > U.id  
+Ref: C.owner_id > U.id
+Ref: C.task_id > T.id
+Ref: F.user1_id - U.id
+Ref: F.user2_id - U.id

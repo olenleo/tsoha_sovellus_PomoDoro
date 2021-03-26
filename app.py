@@ -33,6 +33,11 @@ def login():
             print("INVALID PASSWORD")
     return redirect("/")
     
+@app.route("/feed")
+def refreshFeed():
+    result = db.session.execute("SELECT username FROM users")
+    users = result.fetchall()
+    return render_template("/index.html", users = users)
 
 @app.route("/logout")
 def logout():

@@ -1,5 +1,20 @@
 {% if session.username %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<div>
+    <h3>Hei, {{ session.username }}</h3>
+</div>
+
+<div>
+    <p>Tähän tulee syöte</p>
+    <hr>
+    {% for name in users %}
+    {{ name[0] }}
+    <hr>
+    {% endfor %}
+
+
+    <p>Näytetään kaikki <s> seuratut </s></p>
+</div>
+
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <form action="/login" method="POST">
@@ -9,6 +24,6 @@
 <input type="password" name="password"></p>
 <input type="submit" value="Kirjaudu">
 </form>
-<h1>CREATE</h1>
-<p>HALOO<a href="/newaccount">Create new user</a></p>
+<h1>CREATE NEW ACCOUNT</h1>
+<a href="/newaccount">Create new user</a>
 {% endif %}
