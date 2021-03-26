@@ -32,12 +32,16 @@ def login():
             # TODO: invalid password
             print("INVALID PASSWORD")
     return redirect("/")
-    
+
+
 @app.route("/feed")
 def refreshFeed():
-    result = db.session.execute("SELECT username FROM users")
-    users = result.fetchall()
-    return render_template("/index.html", users = users)
+    result = db.session.execute("SELECT tasks.taskname, users.username FROM tasks, users WHERE tasks.user_id = users.id")
+    
+    searchresult = result.fetchall()
+    
+
+    return render_template("/feed.html", users = searchresult)
 
 @app.route("/logout")
 def logout():
