@@ -1,9 +1,19 @@
-<h1>Create new user</h1>
+{% extends "layout.html" %}
+{% block content %}
 
-<form action="/createNewUser" method="POST">
-    <p>Tunnus:<br>
-    <input type="text" name="username"></p>
-    <p>Salasana:<br>
-    <input type="password" name="password"></p>
-    <input type="submit" value="Luo uusi käyttäjä">
-    </form>
+<h2>Luo käyttäjä</h2>
+
+<form action="/createaccount" method="post">
+Tunnus: <br><input type="text" name="username">
+<p>
+Salasana: <br><input type="password" name="password1">
+Syötä salasana uudelleen: <br><input type="password" name="password2">
+<p>
+<input type="submit" value="Kirjaudu">
+</form>
+
+
+<p>
+<a href="/">Palaa takaisin</a>
+
+{% endblock %}

@@ -1,29 +1,24 @@
-{% if session.username %}
+{% extends "layout.html" %}
+{% block content %}
+<h2> Sisältöä</h2>
+{% if session.user_id %}
+    Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+
+<!-- Listataan tehtävät.--->
 <div>
-    <h3>Hei, {{ session.username }}</h3>
+    <ul>
+        {% for task in tasks %}
+        <li>{{task[0]}} | {{task[1]}}
+        {% endfor %}
+    </ul>
 </div>
-
-<div>
-    <p>Tähän tulee syöte</p>
-    <hr>
-    {% for name in users %}
-    {{ name[0] }}
-    <hr>
-    {% endfor %}
-
-
-    <p>Näytetään kaikki <s> seuratut </s></p>
-</div>
-
-<a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
-</form>
-<h1>CREATE NEW ACCOUNT</h1>
-<a href="/newaccount">Create new user</a>
+    Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+
+    
+{% endblock  %}
+
+
+
+
