@@ -1,12 +1,19 @@
+from flask.globals import session
 from app import app
 from flask import render_template, request, redirect
-import users,tomatoes
-
+import users,tomatoes, comments
+from db import db
 
 
 @app.route("/")
 def index():
-    return render_template("index.html",tasks = tomatoes.get_all_tasks())
+    return render_template("index.html", tasks = tomatoes.get_all_tasks())
+
+@app.route("/comments/<int:id>")
+def individual_comments(id):
+    return render_template("comment.html", id = id, value = comments.get_comments(id), tasks = tomatoes.get_all_tasks())
+
+
 
 @app.route("/login", methods=["get", "post"])
 def login():
@@ -51,4 +58,13 @@ def register():
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
 
+@app.route("/comment", methods=["POST"])
+def comment():
+    text = request.form["comment"]
+    # INSERT INTO Comments (owner_id, task_id, comment, time) VALUES (5,1,'Hyvältä näyttää mutta eikös tämä ole huonosti totetutettu mock-tietokantaa ajatellen?', CURRENT_TIMESTAMP);
+    userID = users.user_id()
+    sql = "INSERT INTO comments (owner_id, task_id, comment, time) VALUES (:owner_id, :task_id, :text, NOW())"
+    result = db.session.execute(sql, {"owner_id":userID, "task_id":1, "text":text})
+    db.session.commit()
+    return redirect("/")
 

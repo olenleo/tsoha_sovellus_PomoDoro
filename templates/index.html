@@ -6,11 +6,16 @@
 
 <!-- Listataan tehtävät.--->
 <div>
+    <p>Tämä on tehtävälistan div</p>
     <ul>
         {% for task in tasks %}
-        <li>{{task[0]}} | {{task[1]}}
+            <li>{{task[0]}} | {{task[1]}} | <a href="/comments/{{ task[2] }}">Kommentoi</a> </li>
         {% endfor %}
     </ul>
+</div>
+<div>
+<p>Tähän diviin tulee uuden postin käyttöliittymä</p>
+
 </div>
 {% else %}
     Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
