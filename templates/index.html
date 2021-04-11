@@ -1,21 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2> Sisältöä</h2>
+
 {% if session.user_id %}
     Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
 
 <!-- Listataan tehtävät.--->
+<h2> Uutissyöte</h2>
 <div>
-    <p>Tämä on tehtävälistan div</p>
+    <h3>Viime aikoina tapahtunutta</h3>
     <ul>
         {% for task in tasks %}
             <li>{{task[0]}} | {{task[1]}} | <a href="/comments/{{ task[2] }}">Kommentoi</a> </li>
         {% endfor %}
     </ul>
+    <p>Jätä kommentti tsempataksesi tai esittääksesi kysymyksiä!</p>
 </div>
 <div>
-<p>Tähän diviin tulee uuden postin käyttöliittymä</p>
+<h3>Uusi aihepiiri</h3>
+<p>Sovelluksen "taskset"it kokoavat tekemäsi tomaatit jonkin teeman alle. Nimeämällä kokonaisuutesi hyvin
+    voit auttaa muita löytämään syötteesi! </p>
 
+<form>
+    Aihe: <input type = "text" name = "new_taskset_name" />
+    <input type = "submit" name = "submit" value = "Lisää" />
+ </form>
+
+
+ <h3>Uusi tomaatti</h3>
+ <p>Tomaatit ovat ~25 minuutin aikaviipaleita. Jätä lyhyt kuvaus tekemisistäsi jonkin tehtäväkokonaisuuden parissa!</p>
+ <form>
+    Valitse aihepiiri
+    <!-- TODO: Haku tietokannasta... -->
+    <select name = "select_taskset">
+        <option value = "Tietokannan rakentelua" selected>Tietokannan rakentelua</option>
+        <option value = "Muu">Muu</option>
+     </select>
+     <input type = "text" name = "tomato_subject" />
+     <input type = "submit" name = "submit" value = "Lisää" />
+ </form>    
 </div>
 {% else %}
     Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>

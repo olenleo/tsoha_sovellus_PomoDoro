@@ -33,6 +33,11 @@ CREATE TABLE Follows (
     user2_id INT REFERENCES Users (id)
 );
 
+
+/*
+Testausta varten; tämä on poistettavissa. 
+TODO: admin-oikeuksilla ei vielä tee mitään, mutta tuo salasanan julkaisuhan ei ehkä ole ihan ok.
+*/
 INSERT INTO Users (username, password, admin) VALUES ('Olen.Leo', 'Basso', TRUE);
 INSERT INTO Tasksets (owner_id, name) VALUES (1, 'Tietokannan rakentelua');
 INSERT INTO Tasks (user_id, taskset_id, taskname, completed) VALUES (1,1, 'Esimerkkien lisäystä PSQL-tulkin kautta', CURRENT_TIMESTAMP);
