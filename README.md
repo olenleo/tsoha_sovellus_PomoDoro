@@ -3,7 +3,7 @@ Repositorio liittyy Helsingin Yliopiston [Tietokantasovellus](https://hy-tsoha.g
 Kurssilla toteutetaan tietokantaa hyödyntävä web-sovellus.
 
 Sovellus on testattavissa [tämän linkin takana](https://tsoha-pomodoro.herokuapp.com/).
-Lisätietoa [määrittelydokumentissa](https://github.com/olenleo/tsoha_sovellus_PomoDoro/maarittelydokumentti.md)
+Lisätietoa [määrittelydokumentissa](https://github.com/olenleo/tsoha_sovellus_PomoDoro/blob/main/maarittelydokumentti.md)
 
 # Sovelluksen nykytila
 
