@@ -20,24 +20,27 @@
 <p>Sovelluksen "taskset"it kokoavat tekemäsi tomaatit jonkin teeman alle. Nimeämällä kokonaisuutesi hyvin
     voit auttaa muita löytämään syötteesi! </p>
 
-<form>
+<form action="/newtaskset", method="post">
     Aihe: <input type = "text" name = "new_taskset_name" />
-    <input type = "submit" name = "submit" value = "Lisää" />
+    <input type = "submit" value = "Lisää" />
  </form>
 
 
  <h3>Uusi tomaatti</h3>
  <p>Tomaatit ovat ~25 minuutin aikaviipaleita. Jätä lyhyt kuvaus tekemisistäsi jonkin tehtäväkokonaisuuden parissa!</p>
- <form>
+ <form action="/addnewtomato", method="post">
     Valitse aihepiiri
     <!-- TODO: Haku tietokannasta... -->
-    <select name = "select_taskset">
-        <option value = "Tietokannan rakentelua" selected>Tietokannan rakentelua</option>
-        <option value = "Muu">Muu</option>
-     </select>
-     <input type = "text" name = "tomato_subject" />
-     <input type = "submit" name = "submit" value = "Lisää" />
- </form>    
+        <select name ="tasksets">
+        {% for item in tasksets %}
+        <option value="{{ tasksets[0] }}">{{ item[0] }}</option>
+        {% endfor %}
+        </select>
+        <input type = "text" name = "tomato_subject" />
+        <input type = "submit" value = "Lisää" />
+    </form>
+        
+ 
 </div>
 {% else %}
     Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>

@@ -1,13 +1,13 @@
 from flask.globals import session
 from app import app
 from flask import render_template, request, redirect
-import users,tomatoes, comments
+import users,tomatoes, comments, tasksets
 from db import db
 
 
 @app.route("/")
 def index():
-    return render_template("index.html", tasks = tomatoes.get_all_tasks())
+    return render_template("index.html", tasks = tomatoes.get_all_tasks(), tasksets = tasksets.get_all_tasksets())
 
 @app.route("/comments/<int:id>")
 def individual_comments(id):
@@ -68,3 +68,34 @@ def comment():
     db.session.commit()
     return redirect("/")
 
+@app.route("/newtaskset", methods=["POST"])
+def new_taskset():
+    name = request.form["new_taskset_name"]
+    userID = users.user_id()
+    sql = "INSERT INTO tasksets (owner_id, name) VALUES (:owner_id, :name)"
+    result = db.session.execute(sql, {"owner_id": userID, "name": name})
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/addnewtomato", methods=["POST"])
+def add_new_task(): 
+    name = request.form["tomato_subject"]
+    taskset = request.form["tasksets"]
+    userID = users.user_id()
+    
+    taskset_id = tasksets.get_taskset_id(taskset)
+    print(' ')
+    print(' ')
+    print(' ')
+    print('Testailua: ')
+    print('name', name)
+    print('taskset', taskset)
+    print('user_id', userID)
+    print('taskset_id', taskset_id)
+    
+    sql = "INSERT INTO tasks (user_id, taskset_id, taskname, completed) VALUES (:user_id, :taskset_id, :name, NOW())"
+    
+    result = db.session.execute(sql, {"user_id": userID, "taskset_id": 1, "name": name})
+    db.session.commit()
+    
+    return redirect("/")
