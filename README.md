@@ -2,35 +2,20 @@
 Repositorio liittyy Helsingin Yliopiston [Tietokantasovellus](https://hy-tsoha.github.io/materiaali/index)-kurssin harjoitustyöhön.
 Kurssilla toteutetaan tietokantaa hyödyntävä web-sovellus.
 
-# Sovelluksen kuvaus
+Sovellus on testattavissa [tämän linkin takana](https://tsoha-pomodoro.herokuapp.com/).
+Lisätietoa [määrittelydokumentissa](https://github.com/olenleo/tsoha_sovellus_PomoDoro/maarittelydokumentti.md)
 
-PomoDoro on [pomodoro-tekniikaan](https://en.wikipedia.org/wiki/Pomodoro_Technique) perustuva web-sovellus. Pomodorot ovat ~25 minuutin aikaviipaleita. Käyttäjä voi seurata muiden käyttäjien työtä sekä kommentoida tsempatakseen!
+# Sovelluksen nykytila
 
-Käyttäjä voi
-- Luoda uniikin tilin - esimerkiksi `@M_Mallikas1985`
-- Aloittaa tehtäväkokonaisuuden - esimerkiksi `'Lineaarialgebran opiskelu'`
-- Merkitä tehdyn tomaatin - esimerkiksi `@M_Mallikas1985 | 'Lineaarialgebran opiskelu' | "Ominaisvektorit.. huh vaikeaa!"`
-- Kommentoida omaa tai toisen julkaistua tomaattia - esimerkiksi `User @AAaberg commented: "Kämpa på! 3blue1brown hade en bra video om det där"`
-- Poistaa tilinsä ja kaiken siihen liittyvän informaation
+Sovelluksen ydintoiminnallisuus on veilä puuttellista, mutta yksinkertaisella tasolla käytettävää.
+
+Pulmakohtia / bugeja on tällä hetkellä kommentoinnissa, joissa kaikki kommentit ovat nähtävillä. Tämä johtuu virheestä uusien *tomaattien* tallennuksessa; tällä hetkellä kaikki tehdyt tomaatit tallennetaan samaan tasksetiin.
 
 
-Mahdollisia skenaarioita:
-- Käyttäjä kirjautuu sisään
-* Käyttäjä saapuu päänäkymään, jossa listataan viimeiset 25 tomaattia.
-* Käyttäjä voi myös halutessaan listata vain seuraamiensa käyttäjien tomaatit
-* Lista on päivitettävissä.
-* Päänäkymässä voi lisätä uuden tehtäväkokonaisuuden tai uuden tehdyn tomaatin.
+**Kysymys:** Taskset-luokan metodin get_taskset_id() toteuttaminen oli pulmallista. Tällä hetkellä välitän tomaatin nimen periaattella <code>taskset.get_taskset_id(tomaatin_nimi)</code>. Tämä aiheuttaa kuitenkin lisämerkkejä merkkijonoon, esimerkiksi <code>('Tehtävän nimi')</code>.
 
-- Käyttäjä haluaa reagoida toisen käyttäjän tomaattiin
-* Vaihtoehto: Kommentoi
-   Käyttäjä voi lisätä lyhyen kommentin
-* Vaihtoehto: Seuraa / Poista seurattavista
-   Toinen käyttäjä lisätään tai poistetaan seurattavien käyttäjien listalta.
+Ratkaisin tämän trimmaamalla merkkijonosta sopivasti merkkejä alusta ja lopusta pythonin avulla. Tämä tuntuu kuitenkin vähän kömpelöltä ratkaisulta. En toisaalta keksi mitään perustetta tehdä trimmausta tietokannan puolella esimerkiksi säännöllisillä lausekkeilla (Regular Expression). Onko 
+
+Sovelluksessa on vielä paljon refaktoroitavaa. Pahoittelut etenkin englannin ja suomen sekakäytöstä.
 
 
-
-
-# Jatkokehitys
-Sovellusta voisi laajentaa graafisella käyttöliittymällä jossa ajastin seuraa jokaisen tehtävän suoritusta. Ajastimen lauetessa käyttäjä syöttää kuvauksen tekemisistään joka lisätään tietokantaaan.
-
-Reaaliaikainen päivitys jollain mukavalla grafiikalla - värillä tai käyttäjän valitsemalla kuvakkeella merkityt tomaatit valuvat hiljalleen alaspäin uusien valmistuessa.
