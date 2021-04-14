@@ -43,6 +43,6 @@ INSERT INTO Tasksets (owner_id, name) VALUES (1, 'Tietokannan rakentelua');
 INSERT INTO Tasks (user_id, taskset_id, taskname, completed) VALUES (1,1, 'Esimerkkien lisäystä PSQL-tulkin kautta', CURRENT_TIMESTAMP);
 INSERT INTO Users (username, password, admin) VALUES ('Leonkaveri', 'Basso', FALSE);
 INSERT INTO Follows (user1_id, user2_id) VALUES (2,1);
-INSERT INTO Comments (owner_id, task_id, comment, time) VALUES (2,1,'Hyvältä näyttää mutta eikös tämä ole huonosti totetutettu mock-tietokantaa ajatellen?', CURRENT_TIMESTAMP);
+INSERT INTO Comments (owner_id, task_id, comment, time) VALUES (2,1,'Hyvältä näyttää?', CURRENT_TIMESTAMP);
 
 

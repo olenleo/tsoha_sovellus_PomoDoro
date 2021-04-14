@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1> Kommentit: </h1>
+
+{% for item in commentlist %}
+<p> {{item[0]}} </em> :  {{item[1]}} </p> 
+
+{% endfor %}
+<form action="/post/comments/" method="POST">
+    <input type="text" name="comment"><input type="submit" value="Kommentoi">
+    <input type="hidden" name="task_id" value="{{ id }}">
+</form>
+
+<a href="/">Takaisin</a>
+{% endblock %}
+
+
+
+
+
+

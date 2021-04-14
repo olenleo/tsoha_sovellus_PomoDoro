@@ -5,18 +5,20 @@
     Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
 
 <!-- Listataan tehtävät.--->
-<h2> Uutissyöte</h2>
+<h2> Tervetuloa! </h2>
 <div>
     <h3>Viime aikoina tapahtunutta</h3>
     <ul>
         {% for task in tasks %}
-            <li>{{task[0]}} | {{task[1]}} | <a href="/comments/{{ task[2] }}">Kommentoi</a> </li>
+            <li>{{task[0]}} | {{task[2]}} | {{task[1]}} <a href="/view/comments/{{ task[2] }}">Kommentoi</a> </li>
         {% endfor %}
     </ul>
     <p>Jätä kommentti tsempataksesi tai esittääksesi kysymyksiä!</p>
 </div>
+
 <div>
 <h3>Uusi aihepiiri</h3>
+
 <p>Sovelluksen "taskset"it kokoavat tekemäsi tomaatit jonkin teeman alle. Nimeämällä kokonaisuutesi hyvin
     voit auttaa muita löytämään syötteesi! </p>
 
@@ -28,16 +30,21 @@
 
  <h3>Uusi tomaatti</h3>
  <p>Tomaatit ovat ~25 minuutin aikaviipaleita. Jätä lyhyt kuvaus tekemisistäsi jonkin tehtäväkokonaisuuden parissa!</p>
- <form action="/addnewtomato", method="post">
-    Valitse aihepiiri
+ 
+ <form action="/addnewtomato", method="POST">
+    <p>Valitse aihepiiri</p>
     <!-- TODO: Haku tietokannasta... -->
-        <select name ="tasksets">
+        <select input type="text" name ="juttu">
         {% for item in tasksets %}
-        <option value="{{ tasksets[0] }}">{{ item[0] }}</option>
+            <option value="{{ item[0] }}">{{ item[1]}}</option>
         {% endfor %}
         </select>
+        
+
+<!--        <input type = "text" name = "juttu" />-->
         <input type = "text" name = "tomato_subject" />
         <input type = "submit" value = "Lisää" />
+
     </form>
         
  
