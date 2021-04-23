@@ -4,7 +4,7 @@
 <h1> Kommentit: </h1>
 
 {% for item in commentlist %}
-<p> {{item[0]}} </em> :  {{item[1]}} </p> 
+<p> {{item[2]}} </em> :  {{item[0]}} </p> 
 
 {% endfor %}
 <form action="/post/comments/" method="POST">

@@ -37,31 +37,36 @@ def register():
 
     if request.method == "POST":
         username = request.form["username"]
-        if len(username) < 1 or len(username) > 20:
-            return render_template("error.html", message="Tunnuksessa tulee olla 1-20 merkkiä")
+        if len(username) < 5 or len(username) > 20:
+            return render_template("error.html", message="Tunnuksessa tulee olla 5-20 merkkiä")
 
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+        
         if password1 != password2:
             return render_template("error.html", message="Salasanat eroavat")
         if password1 == "":
             return render_template("error.html", message="Salasana on tyhjä")
-
+        if len(password1) < 5:
+            return render_template("error.html", message="Salasanassa tulee olla vähintään 5 merkkiä!")
         
         if users.register(username, password1):
             return redirect("/")
         else:
-            return render_template("error.html", message="Rekisteröinti ei onnistunut")
+            return render_template("error.html", message="Tunnistautuminen epäonnistui.")
 
 @app.route("/view/comments/<int:id>", methods=["GET"])
 def comment(id):
-        return render_template("comments.html", id = id, tasks = tomatoes.get_tasks_for_id(id) ,commentlist = comments.get_comments(id))
+    print("Hej fra routes, id =" , id)
+    return render_template("comments.html", id = id, commentlist = comments.get_comments(id))
 
 @app.route("/post/comments/", methods=["POST"])
 def post_comment():
     owner_id = users.user_id()
     task_id = request.form["task_id"]
     text = request.form["comment"]
+    if (len(text) == 0):
+        return render_template("error.html", message="Tyhjä kommentti.")
     print(owner_id, task_id, text, ' Ollaan tässä ')
     comments.post_comment(owner_id, task_id, text)
     return redirect("/view/comments/" + str(task_id))
@@ -70,18 +75,15 @@ def post_comment():
 @app.route("/newtaskset", methods=["POST"])
 def new_taskset():
     name = request.form["new_taskset_name"]
-    userID = users.user_id()
-    sql = "INSERT INTO tasksets (owner_id, name) VALUES (:owner_id, :name)"
-    result = db.session.execute(sql, {"owner_id": userID, "name": name})
-    db.session.commit()
+    if (len(name) == 0):
+        return render_template("error.html", message="Tyhjä taskset.")
+    tasksets.insert_new_taskset(users.user_id(), name)
     return redirect("/")
 
 @app.route("/addnewtomato", methods=["POST"])
 def add_new_task(): 
     taskname = request.form["tomato_subject"]
-    taskset_id = request.form["juttu"]
-    user_id = users.user_id()
-    sql = "INSERT INTO tasks (user_id, taskset_id, taskname, completed) VALUES (:user_id, :taskset_id, :taskname, NOW())"
-    result = db.session.execute(sql, {"user_id": user_id, "taskset_id": taskset_id, "taskname": taskname})
-    db.session.commit()
+    if (len(taskname) < 5 or len(taskname) > 60):
+        return render_template("error.html", message="Tomaattikuvaksen pituus 5-60 merkkiä.")
+    tomatoes.insert_new_task(users.user_id(), request.form["juttu"], taskname)
     return redirect("/")

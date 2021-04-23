@@ -2,7 +2,7 @@
 {% block content %}
 
 {% if session.user_id %}
-    Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+
 
 <!-- Listataan tehtävät.--->
 <h2> Tervetuloa! </h2>
@@ -10,7 +10,7 @@
     <h3>Viime aikoina tapahtunutta</h3>
     <ul>
         {% for task in tasks %}
-            <li>{{task[0]}} | {{task[2]}} | {{task[1]}} <a href="/view/comments/{{ task[2] }}">Kommentoi</a> </li>
+            <li>{{task[1]}} | <em>{{task[0]}}</em> <a href="/view/comments/{{ task[2] }}">Kommentoi</a> </li>
         {% endfor %}
     </ul>
     <p>Jätä kommentti tsempataksesi tai esittääksesi kysymyksiä!</p>
@@ -33,27 +33,21 @@
  
  <form action="/addnewtomato", method="POST">
     <p>Valitse aihepiiri</p>
-    <!-- TODO: Haku tietokannasta... -->
         <select input type="text" name ="juttu">
         {% for item in tasksets %}
             <option value="{{ item[0] }}">{{ item[1]}}</option>
         {% endfor %}
         </select>
-        
-
-<!--        <input type = "text" name = "juttu" />-->
         <input type = "text" name = "tomato_subject" />
         <input type = "submit" value = "Lisää" />
 
     </form>
         
- 
 </div>
 {% else %}
     Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}
-
-    
+   
 {% endblock  %}
 
 
