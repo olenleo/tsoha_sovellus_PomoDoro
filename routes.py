@@ -85,5 +85,5 @@ def add_new_task():
     taskname = request.form["tomato_subject"]
     if (len(taskname) < 5 or len(taskname) > 60):
         return render_template("error.html", message="Tomaattikuvaksen pituus 5-60 merkkiä.")
-    tomatoes.insert_new_task(users.user_id(), request.form["juttu"], taskname)
+    tomatoes.insert_new_task(users.user_id(), request.form["tomato_name"], taskname)
     return redirect("/")

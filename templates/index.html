@@ -10,7 +10,7 @@
     <h3>Viime aikoina tapahtunutta</h3>
     <ul>
         {% for task in tasks %}
-            <li>{{task[1]}} | <em>{{task[0]}}</em> <a href="/view/comments/{{ task[2] }}">Kommentoi</a> </li>
+            <li>{{task[1]}} | <em>{{task[0]}}</em> | <a href="/view/comments/{{ task[2] }}">Kommentoi</a> </li>
         {% endfor %}
     </ul>
     <p>Jätä kommentti tsempataksesi tai esittääksesi kysymyksiä!</p>
@@ -33,7 +33,7 @@
  
  <form action="/addnewtomato", method="POST">
     <p>Valitse aihepiiri</p>
-        <select input type="text" name ="juttu">
+        <select input type="text" name ="tomato_name">
         {% for item in tasksets %}
             <option value="{{ item[0] }}">{{ item[1]}}</option>
         {% endfor %}
