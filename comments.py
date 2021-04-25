@@ -21,7 +21,7 @@ def post_comment(owner_id, task_id, comment):
     sql = """INSERT INTO comments (owner_id, task_id, time, comment) VALUES (:owner_id, :task_id, NOW(), :comment)"""
     result = db.session.execute(sql, {"owner_id": owner_id, "task_id": task_id, "comment":comment})
     db.session.commit()
-    print("Sinne män.")
+    
 
 
 

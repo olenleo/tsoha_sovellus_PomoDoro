@@ -19,5 +19,4 @@ def insert_new_task(user_id, taskset_id, taskname):
     sql = "INSERT INTO tasks (user_id, taskset_id, taskname, completed) VALUES (:user_id, :taskset_id, :taskname, NOW())"
     result = db.session.execute(sql, {"user_id": user_id, "taskset_id": taskset_id, "taskname": taskname})
     db.session.commit()
-
-    return 
+    
