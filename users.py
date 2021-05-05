@@ -1,7 +1,6 @@
 from db import db
 from flask import abort, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
-import os
 
 
 def login(name, password):
@@ -25,8 +24,7 @@ def logout():
 def register(name, password):
     hash_value = generate_password_hash(password)
     try:
-        sql = """INSERT INTO users (username, password)
-                 VALUES (:name, :password)"""
+        sql = "INSERT INTO users (username, password) VALUES (:name, :password)"
         db.session.execute(sql, {"name":name, "password":hash_value})
         db.session.commit()
     except:

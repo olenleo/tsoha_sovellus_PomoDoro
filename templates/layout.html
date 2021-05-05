@@ -5,6 +5,9 @@
 <h1>PomoDoro</h1>
 <hr>
 {% if session.user_id %}
-    Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+    <p>
+        Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>.
+        <a href="/logout">Kirjaudu ulos</a>
+    </p>
 {% endif %}
 {% block content %}{% endblock %}

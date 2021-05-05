@@ -1,7 +1,7 @@
 from flask.globals import session
 from app import app
 from flask import render_template, request, redirect
-import users,tomatoes, comments, tasksets
+import users,tomatoes, comments, tasksets, follows
 from db import db
 
 
@@ -57,7 +57,6 @@ def register():
 
 @app.route("/view/comments/<int:id>", methods=["GET"])
 def comment(id):
-    print("Hej fra routes, id =" , id)
     return render_template("comments.html", id = id, commentlist = comments.get_comments(id))
 
 @app.route("/post/comments/", methods=["POST"])
@@ -87,3 +86,22 @@ def add_new_task():
         return render_template("error.html", message="Tomaattikuvaksen pituus 5-60 merkkiä.")
     tomatoes.insert_new_task(users.user_id(), request.form["tomato_name"], taskname)
     return redirect("/")
+
+@app.route("/follow/<int:id>")
+def follow(id):
+    userID = users.user_id()
+    follows.follow(id, userID)
+    return redirect("/listfollows")
+
+
+@app.route("/unfollow/<int:id>")
+def unfollow(id):
+    userID = users.user_id()
+    follows.unfollow(id, userID)
+    return redirect("/listfollows")
+
+@app.route("/listfollows/")
+def get_list_of_follows():
+    user_id = users.user_id()
+    followlist = follows.get_follows(user_id)
+    return render_template("follow.html", list = followlist)

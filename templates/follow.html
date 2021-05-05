@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1> Seuraat seuraavia käyttäjiä: </h1>
+<p> Lista toho: </p>
+{% for item in list %}
+
+<p>{{item[0]}} <a href="/unfollow/{{ item[1] }}">Poista seurattavista</a></p>
+{% endfor %}
+
+<a href="/">Takaisin</a>
+{% endblock %}

@@ -10,9 +10,16 @@
     <h3>Viime aikoina tapahtunutta</h3>
     <ul>
         {% for task in tasks %}
-            <li>{{task[1]}} | <em>{{task[0]}}</em> | <a href="/view/comments/{{ task[2] }}">Kommentoi</a> </li>
+            <li>
+                {{task[1]}}</a> | 
+                <em>{{task[0]}}</em> | 
+                <a href="/view/comments/{{ task[2] }}">Kommentoi</a> |
+                <a href="/follow/{{task[4]}}"> Seuraa </a>
+            
+            </li>
         {% endfor %}
     </ul>
+    <p><a href= "/listfollows/"> Seuratut </a></p>
     <p>Jätä kommentti tsempataksesi tai esittääksesi kysymyksiä!</p>
 </div>
 

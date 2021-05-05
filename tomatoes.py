@@ -1,11 +1,11 @@
 from db import db
 
 def get_all_tasks():
-    sql = """SELECT taskname, users.username, tasks.id, tasks.completed 
+    sql = """SELECT taskname, users.username, tasks.id, tasks.completed, users.id
     FROM tasks, users 
     WHERE users.id = tasks.user_id 
     ORDER BY tasks.completed desc limit 15 """
-
+    
     return db.session.execute(sql).fetchall()
 
 
