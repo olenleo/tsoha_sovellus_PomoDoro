@@ -9,6 +9,11 @@ from db import db
 def index():
     return render_template("index.html", tasks = tomatoes.get_all_tasks(), tasksets = tasksets.get_all_tasksets())
 
+@app.route("/viewFollowed")
+def filtered_index():
+
+    print("UL;K")
+    return render_template("index.html", tasks = tomatoes.get_all_tasks_from_followed(users.user_id()), tasksets = tasksets.get_all_tasksets())
 
 @app.route("/login", methods=["get", "post"])
 def login():
