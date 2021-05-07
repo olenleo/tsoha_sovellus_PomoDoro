@@ -65,7 +65,6 @@ def comment(id):
 
 @app.route("/post/comments/", methods=["POST"])
 def post_comment():
-    print('ASDASFASFASLKFJASLFKJSAFLKJ')
     users.check_csrf()
     owner_id = users.user_id()
     task_id = request.form["task_id"]
@@ -79,6 +78,7 @@ def post_comment():
 
 @app.route("/newtaskset", methods=["POST"])
 def new_taskset():
+    users.check_csrf()
     name = request.form["new_taskset_name"]
     if (len(name) == 0):
         return render_template("error.html", message="Tyhjä taskset.")
