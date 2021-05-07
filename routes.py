@@ -7,7 +7,6 @@ from db import db
 
 @app.route("/")
 def index():
-
     return render_template("index.html", tasks = tomatoes.get_all_tasks(), tasksets = tasksets.get_all_tasksets())
 
 @app.route("/viewFollowed")
