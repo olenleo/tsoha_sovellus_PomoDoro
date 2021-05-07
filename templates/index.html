@@ -33,6 +33,7 @@
 <form action="/newtaskset", method="post">
     Aihe: <input type = "text" name = "new_taskset_name" />
     <input type = "submit" value = "Lisää" />
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
  </form>
 
 
@@ -44,9 +45,11 @@
         <select input type="text" name ="tomato_name">
         {% for item in tasksets %}
             <option value="{{ item[0] }}">{{ item[1]}}</option>
+            
         {% endfor %}
         </select>
         <input type = "text" name = "tomato_subject" />
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type = "submit" value = "Lisää" />
 
     </form>

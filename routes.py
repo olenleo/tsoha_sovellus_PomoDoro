@@ -1,18 +1,17 @@
 from flask.globals import session
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, abort
 import users,tomatoes, comments, tasksets, follows
 from db import db
 
 
 @app.route("/")
 def index():
+
     return render_template("index.html", tasks = tomatoes.get_all_tasks(), tasksets = tasksets.get_all_tasksets())
 
 @app.route("/viewFollowed")
 def filtered_index():
-
-    print("UL;K")
     return render_template("index.html", tasks = tomatoes.get_all_tasks_from_followed(users.user_id()), tasksets = tasksets.get_all_tasksets())
 
 @app.route("/login", methods=["get", "post"])
@@ -66,12 +65,14 @@ def comment(id):
 
 @app.route("/post/comments/", methods=["POST"])
 def post_comment():
+    print('ASDASFASFASLKFJASLFKJSAFLKJ')
+    users.check_csrf()
     owner_id = users.user_id()
     task_id = request.form["task_id"]
     text = request.form["comment"]
     if (len(text) == 0):
         return render_template("error.html", message="Tyhjä kommentti.")
-    print(owner_id, task_id, text, ' Ollaan tässä ')
+    
     comments.post_comment(owner_id, task_id, text)
     return redirect("/view/comments/" + str(task_id))
 
@@ -89,7 +90,11 @@ def add_new_task():
     taskname = request.form["tomato_subject"]
     if (len(taskname) < 5 or len(taskname) > 60):
         return render_template("error.html", message="Tomaattikuvaksen pituus 5-60 merkkiä.")
-    tomatoes.insert_new_task(users.user_id(), request.form["tomato_name"], taskname)
+    if session["csrf_token"] != request.form["csrf_token"]:
+        
+        abort(403)
+    else:
+        tomatoes.insert_new_task(users.user_id(), request.form["tomato_name"], taskname)
     return redirect("/")
 
 @app.route("/follow/<int:id>")
