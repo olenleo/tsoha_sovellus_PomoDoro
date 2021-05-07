@@ -5,7 +5,6 @@ def get_all_tasks():
     FROM tasks, users 
     WHERE users.id = tasks.user_id 
     ORDER BY tasks.completed desc limit 15 """
-    
     return db.session.execute(sql).fetchall()
 
 def get_all_tasks_from_followed(user_id):
