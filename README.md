@@ -7,23 +7,15 @@ Lisätietoa [määrittelydokumentissa](https://github.com/olenleo/tsoha_sovellus
 
 # Sovelluksen nykytila
 
-Sovelluksen ydintoiminnallisuus on vielä puuttellista, mutta yksinkertaisella tasolla käytettävää.
+Sovelluksesta on toteutettu valtaosa määrittelydokumentin toiminnallisuudesta. Puutteita:
+- Admin-tila ei tällä hetkellä tee mitään.
+- Kommentin muokkaus tai poisto ei vielä implementoitu.
+- Käyttäjän informaation poisto ei implementoitu.
 
-Pulmakohtia / bugeja on tällä hetkellä kommentoinnissa, joissa kaikki kommentit ovat nähtävillä. Tämä johtuu virheestä uusien *tomaattien* tallennuksessa; tällä hetkellä kaikki tehdyt tomaatit tallennetaan samaan tasksetiin. Tämä löytyy Routes-luokan <code>@app.route("/comment", methods=["POST"])</code>-metodista.
+Määrittelydokumentissa ei mainita asiaa, mutta taskset:eja ei tällä hetkellä hyödynnetä oikeastaan mitenkään. 
 
-Mietin josko minun tulisi suorittaa kaksi SQL-kyselyä tuossa metodissa: hakea oikea task_id (tomatoes-luokan metodina) ja sitten suorittaa varsinainen post-pyyntö.
+# Mahdollinen jatkokehitys
 
-**Kysymys:** Taskset-luokan metodin get_taskset_id() toteuttaminen oli pulmallista. Tällä hetkellä välitän tomaatin nimen periaattella <code>taskset.get_taskset_id(tomaatin_nimi)</code>. Tämä aiheuttaa kuitenkin lisämerkkejä merkkijonoon, esimerkiksi <code>('Tehtävän nimi'),</code>.
-
-Ratkaisin tämän trimmaamalla merkkijonosta sopivasti merkkejä alusta ja lopusta pythonin avulla. Tämä tuntuu kuitenkin vähän kömpelöltä. En toisaalta keksi mitään perustetta tehdä trimmausta tietokannan puolella esimerkiksi säännöllisillä lausekkeilla (Regular Expression). Tämä on melko yksinkertainen tapaus, mutta epäilen että vastaavissa tilanteissa on mahdollisia kompastuskivia sovelluksen laajennettavuuden suhteen. Eli, onko jotain ohjenuoraa missä kohtaa merkkijonojen (tai muiden syötteiden) käsittely olisi hyvä suorittaa?
-
-Sovelluksessa on vielä paljon refaktoroitavaa. Pahoittelut etenkin englannin ja suomen sekakäytöstä - siistin nämä ensi palautukseen mennessä!
-
-# Toimintasuunnitelma jatkoa varten
-
-Ratkaisen ensiksi kommentointiin liittyvät pulmat. Tämän jälkeen on vuorossa muitten käyttäjien seuraamisen implementointi, joka johtaakin luontevasti syötteen filtteröintiin. Viestin poistomahdollisuusa olisi varmasti hyvä lisätä käyttömukavuuden kannalta...
-
-Tämän yllä olevan ohella tutustun tarkemmin sovelluksen tietoturvaan.
-
+Ajastin lisäisi käytettävyyttä huomattavasti - aikaviipaleiden seuraaminen on kuitenkin pomodoro-tekniikan perusidea. Tämä olisi tehtävissä pienellä JavaScript-ohjelmalla. TaskSet:ien hyödyntäminen ja kaikkien valikkojen käytettävyyden lisääminen olisi kuitenkin kätevämpää esimerkiksi Reactin avulla. Tällä hetkellä taskset:in valinta-menu tulee pian käyttökelvottomaksi jos näitä taskset:ejä lisätään paljon.
 
 
