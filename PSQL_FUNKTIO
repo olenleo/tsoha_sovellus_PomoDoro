@@ -1,19 +1,19 @@
 # Alla tietokannassa oleva funktio
    CREATE OR REPLACE FUNCTION follow(_id int, _userID int) 
 	RETURNS void
-       language 'plpgsql'
-	    AS	      
-	    $BODY$
-	        BEGIN
-               IF (SELECT EXISTS(
-                  SELECT 1 FROM follows 
-                     WHERE user1_id = _userID 
-                        AND user2_id = _id 
-                       AND (VISIBLE = 0 OR VISIBLE = 1))) 
-              THEN 
-                    UPDATE follows SET visible = 1 WHERE user1_id = _userID AND user2_id = _id;
-                ELSE 
-                    INSERT INTO follows (user1_id, user2_id) VALUES (_userID, _id);
-        END IF;
+       	language 'plpgsql'
+	AS	      
+	$BODY$
+	    BEGIN
+       		IF (SELECT EXISTS(
+		    SELECT 1 FROM follows 
+                    WHERE user1_id = _userID 
+                    AND user2_id = _id 
+                    AND (VISIBLE = 0 OR VISIBLE = 1))) 
+              	    THEN 
+                        UPDATE follows SET visible = 1 WHERE user1_id = _userID AND user2_id = _id;
+                    ELSE 
+                        INSERT INTO follows (user1_id, user2_id) VALUES (_userID, _id);
+	        END IF;
         END;
 $BODY$;
