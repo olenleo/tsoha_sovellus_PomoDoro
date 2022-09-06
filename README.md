@@ -7,7 +7,7 @@ Sovellus on testattavissa [tämän linkin takana](https://tsoha-pomodoro.herokua
 
 # Sovelluksen kuvaus
 
-PomoDoro-sovellus tarjoaa mahdollisuuden jakaa suorittamiaan PomoForoja - 25 minuutin aikaviipaleita - muille sovelluksen käyttäjille. Käyttäjä voi myös seurata yksittäisiä muita käyttäjiä ja tarkastella vain seuraamiensa käyttäjien tekemisiä.
+PomoDoro-sovellus tarjoaa mahdollisuuden jakaa suorittamiaan PomoDoroja - 25 minuutin aikaviipaleita - muille sovelluksen käyttäjille. Käyttäjä voi myös seurata yksittäisiä muita käyttäjiä ja tarkastella vain seuraamiensa käyttäjien tekemisiä.
 
 Kukin suoritettu PomoDoro sisältää kommentointimahdollisuuden. Näin ollen käyttäjät voivat viestitellä keskenään, tsempatakseen tai vaihtaakseen ideoita.
 
